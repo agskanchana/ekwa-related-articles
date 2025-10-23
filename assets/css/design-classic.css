@@ -1,0 +1,218 @@
+/**
+ * EKWA Related Articles - Classic Design
+ * Traditional blog layout with elegant typography
+ */
+
+/* ==================================
+   Post Layout - Classic
+   ================================== */
+
+.ekwa-blog-post {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.ekwa-blog-post:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: #2c5aa0;
+}
+
+/* Post Thumbnail */
+.ekwa-post-thumbnail {
+    margin: -25px -25px 20px -25px;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.ekwa-post-thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.ekwa-blog-post:hover .ekwa-post-thumbnail img {
+    transform: scale(1.05);
+}
+
+/* Post Title */
+.ekwa-post-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 15px 0;
+    font-family: Georgia, serif;
+}
+
+.ekwa-post-title a {
+    color: #222;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ekwa-post-title a:hover {
+    color: #2c5aa0;
+}
+
+/* Post Meta */
+.ekwa-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 18px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.ekwa-post-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.ekwa-post-meta svg {
+    width: 16px;
+    height: 16px;
+    color: #2c5aa0;
+}
+
+.ekwa-post-meta a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ekwa-post-meta a:hover {
+    color: #2c5aa0;
+}
+
+/* Post Excerpt */
+.ekwa-post-excerpt {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Read More Button */
+.ekwa-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: #2c5aa0;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 2px solid #2c5aa0;
+}
+
+.ekwa-read-more:hover {
+    background: #fff;
+    color: #2c5aa0;
+    transform: translateX(5px);
+}
+
+.ekwa-read-more svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.ekwa-read-more:hover svg {
+    transform: translateX(4px);
+}
+
+/* Single Post Specific */
+.ekwa-single-post-content .ekwa-post-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.ekwa-single-post-content .ekwa-featured-image {
+    margin: 0 0 30px 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ekwa-single-post-content .ekwa-post-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.ekwa-single-post-content .ekwa-post-content p {
+    margin-bottom: 1.5em;
+}
+
+.ekwa-single-post-content .ekwa-post-content h2,
+.ekwa-single-post-content .ekwa-post-content h3 {
+    margin-top: 1.8em;
+    margin-bottom: 0.8em;
+    color: #222;
+    font-weight: 700;
+}
+
+/* Pagination */
+.ekwa-pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0;
+    padding: 20px 0;
+}
+
+.ekwa-pagination-wrapper a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.ekwa-pagination-wrapper a:hover {
+    background: #2c5aa0;
+    color: #fff;
+    border-color: #2c5aa0;
+}
+
+.ekwa-pagination-wrapper a.active {
+    background: #2c5aa0;
+    color: #fff;
+    border-color: #2c5aa0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ekwa-post-title {
+        font-size: 1.5rem;
+    }
+
+    .ekwa-single-post-content .ekwa-post-title {
+        font-size: 2rem;
+    }
+
+    .ekwa-blog-post {
+        padding: 20px;
+    }
+
+    .ekwa-post-thumbnail {
+        margin: -20px -20px 15px -20px;
+    }
+}
