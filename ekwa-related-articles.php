@@ -3,7 +3,7 @@
  * Plugin Name: EKWA Related Articles
  * Plugin URI: https://ekwa.com
  * Description: Custom blog templates with multiple designs for single posts, blog roll, and archives. Includes configurable sidebar position and prev/next navigation.
- * Version: 1.0.2
+ * Version: 1.0.4
  * Author: EKWA
  * Author URI: https://ekwa.com
  * License: GPL-2.0+
@@ -26,7 +26,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 );
 
 // Define plugin constants
-define('EKWA_RELATED_ARTICLES_VERSION', '1.0.2');
+define('EKWA_RELATED_ARTICLES_VERSION', '1.0.4');
 define('EKWA_RELATED_ARTICLES_PATH', plugin_dir_path(__FILE__));
 define('EKWA_RELATED_ARTICLES_URL', plugin_dir_url(__FILE__));
 
