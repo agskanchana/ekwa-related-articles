@@ -1,0 +1,332 @@
+/**
+ * EKWA Related Articles - Carousel Styles
+ * Version: 1.0.0
+ */
+
+/* ==================================
+   Carousel Container
+   ================================== */
+
+.ekwa-related-articles-carousel {
+    position: relative;
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.ekwa-carousel-heading {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #222;
+    text-align: center;
+}
+
+.ekwa-carousel-container {
+    overflow: hidden;
+    position: relative;
+}
+
+.ekwa-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+/* ==================================
+   Carousel Item
+   ================================== */
+
+.ekwa-carousel-item {
+    flex: 0 0 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.ekwa-article-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ekwa-article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.ekwa-article-image {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding-top: 60%;
+}
+
+.ekwa-article-image a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ekwa-article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.ekwa-article-card:hover .ekwa-article-image img {
+    transform: scale(1.05);
+}
+
+.ekwa-article-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ekwa-article-title {
+    font-size: 1.2rem;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+.ekwa-article-title a {
+    color: #222;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ekwa-article-title a:hover {
+    color: #0073aa;
+}
+
+.ekwa-article-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.ekwa-article-meta svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.ekwa-article-excerpt {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+    flex: 1;
+}
+
+.ekwa-article-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #0073aa;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.ekwa-article-read-more:hover {
+    color: #005a87;
+    gap: 10px;
+}
+
+.ekwa-article-read-more svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* ==================================
+   Navigation Arrows
+   ================================== */
+
+.ekwa-carousel-prev,
+.ekwa-carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ekwa-carousel-prev:hover,
+.ekwa-carousel-next:hover {
+    background: #0073aa;
+    border-color: #0073aa;
+    color: #fff;
+}
+
+.ekwa-carousel-prev:hover svg,
+.ekwa-carousel-next:hover svg {
+    stroke: #fff;
+}
+
+.ekwa-carousel-prev {
+    left: -25px;
+}
+
+.ekwa-carousel-next {
+    right: -25px;
+}
+
+.ekwa-carousel-prev:disabled,
+.ekwa-carousel-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.ekwa-carousel-prev svg,
+.ekwa-carousel-next svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ==================================
+   Dots Navigation
+   ================================== */
+
+.ekwa-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.ekwa-carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ekwa-carousel-dot:hover {
+    background: #999;
+}
+
+.ekwa-carousel-dot.active {
+    background: #0073aa;
+    width: 30px;
+    border-radius: 6px;
+}
+
+/* ==================================
+   Responsive
+   ================================== */
+
+@media (max-width: 992px) {
+    .ekwa-carousel-prev {
+        left: 0;
+    }
+
+    .ekwa-carousel-next {
+        right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .ekwa-related-articles-carousel {
+        padding: 0 10px;
+    }
+
+    .ekwa-carousel-heading {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .ekwa-carousel-item {
+        padding: 0 10px;
+    }
+
+    .ekwa-carousel-prev,
+    .ekwa-carousel-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .ekwa-carousel-prev svg,
+    .ekwa-carousel-next svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ekwa-carousel-heading {
+        font-size: 1.4rem;
+    }
+
+    .ekwa-article-content {
+        padding: 15px;
+    }
+
+    .ekwa-article-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* ==================================
+   Lazy Loading Styles
+   ================================== */
+
+.ekwa-article-image img.lazyload {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ekwa-article-image img.lazyloaded {
+    opacity: 1;
+}
+
+/* Optional: Add a loading placeholder */
+.ekwa-article-image img.lazyload::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

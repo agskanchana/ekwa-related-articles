@@ -1,0 +1,661 @@
+/**
+ * EKWA Related Articles - Styles
+ * Version: 1.0.0
+ */
+
+/* ==================================
+   Global Container Styles
+   ================================== */
+
+.ekwa-blog-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.ekwa-content-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* ==================================
+   Main Content Area
+   ================================== */
+
+.ekwa-main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.ekwa-full-width {
+    flex: 1;
+    width: 100%;
+}
+
+/* ==================================
+   Sidebar Styles
+   ================================== */
+
+.ekwa-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.ekwa-sidebar-left {
+    order: -1;
+}
+
+.ekwa-sidebar-right {
+    order: 1;
+}
+
+/* ==================================
+   Single Post Styles
+   ================================== */
+
+.ekwa-single-post {
+    background: #fff;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.ekwa-post-header {
+    margin-bottom: 30px;
+}
+
+.ekwa-post-title {
+    font-size: 2.5rem;
+    line-height: 1.3;
+    margin: 0 0 20px 0;
+    color: #222;
+}
+
+.ekwa-post-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ekwa-post-title a:hover {
+    color: #0073aa;
+}
+
+.ekwa-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.ekwa-post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ekwa-post-meta svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.ekwa-post-tags svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.ekwa-nav-subtitle svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.ekwa-read-more svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.ekwa-pagination svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.ekwa-post-thumbnail {
+    margin-bottom: 30px;
+}
+
+.ekwa-post-thumbnail img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.ekwa-post-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.ekwa-post-content p {
+    margin-bottom: 1.5em;
+}
+
+.ekwa-post-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ekwa-post-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.ekwa-post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.ekwa-post-tags a {
+    background: #f0f0f0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.ekwa-post-tags a:hover {
+    background: #0073aa;
+    color: #fff;
+}
+
+.ekwa-back-to-category {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.ekwa-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #0073aa;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.ekwa-back-link:hover {
+    background: #005a87;
+    transform: translateX(-5px);
+}
+
+.ekwa-back-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* ==================================
+   Post Navigation
+   ================================== */
+
+.ekwa-post-navigation {
+    background: #fff;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.ekwa-nav-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.ekwa-nav-previous,
+.ekwa-nav-next {
+    min-height: 80px;
+}
+
+.ekwa-nav-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.ekwa-nav-link:hover {
+    background: #0073aa;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.ekwa-nav-subtitle {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ekwa-nav-link:hover .ekwa-nav-subtitle {
+    color: #fff;
+}
+
+.ekwa-nav-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.ekwa-nav-link:hover .ekwa-nav-title {
+    color: #fff;
+}
+
+.ekwa-nav-next .ekwa-nav-link {
+    text-align: right;
+}
+
+.ekwa-nav-next .ekwa-nav-subtitle {
+    justify-content: flex-end;
+}
+
+/* ==================================
+   Sidebar Widget Styles
+   ================================== */
+
+.ekwa-widget {
+    background: #fff;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.ekwa-widget-title {
+    font-size: 1.3rem;
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #0073aa;
+    color: #222;
+}
+
+.ekwa-recent-posts-list,
+.ekwa-categories-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ekwa-recent-post-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.ekwa-recent-post-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.ekwa-recent-post-thumbnail {
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.ekwa-recent-post-thumbnail img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.ekwa-recent-post-details {
+    flex: 1;
+}
+
+.ekwa-recent-post-title {
+    font-size: 0.95rem;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.ekwa-recent-post-title a {
+    color: #222;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ekwa-recent-post-title a:hover {
+    color: #0073aa;
+}
+
+.ekwa-recent-post-date {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.ekwa-category-item {
+    margin-bottom: 12px;
+}
+
+.ekwa-category-item:last-child {
+    margin-bottom: 0;
+}
+
+.ekwa-category-item a {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #f9f9f9;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.ekwa-category-item a:hover {
+    background: #0073aa;
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.ekwa-category-count {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.ekwa-category-item a:hover .ekwa-category-count {
+    color: #fff;
+}
+
+/* ==================================
+   Blog Index/Archive Styles
+   ================================== */
+
+.ekwa-page-header,
+.ekwa-archive-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #0073aa;
+}
+
+.ekwa-page-title,
+.ekwa-archive-title {
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    color: #222;
+}
+
+.ekwa-archive-description {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.ekwa-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.ekwa-blog-post {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ekwa-blog-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.ekwa-blog-post .ekwa-post-header {
+    padding: 20px 25px 10px;
+    margin-bottom: 0;
+}
+
+.ekwa-blog-post .ekwa-post-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.ekwa-blog-post .ekwa-post-thumbnail {
+    margin: 0;
+}
+
+.ekwa-blog-post .ekwa-post-thumbnail img {
+    border-radius: 0;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.ekwa-post-excerpt {
+    padding: 0 25px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.ekwa-blog-post .ekwa-post-footer {
+    padding: 20px 25px;
+    margin: 0;
+    border-top: none;
+}
+
+.ekwa-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #0073aa;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.ekwa-read-more:hover {
+    background: #005a87;
+    transform: translateX(5px);
+}
+
+/* ==================================
+   Pagination
+   ================================== */
+
+.ekwa-pagination {
+    margin-top: 40px;
+}
+
+.ekwa-pagination .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ekwa-pagination a,
+.ekwa-pagination span {
+    padding: 10px 18px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.ekwa-pagination a:hover,
+.ekwa-pagination .current {
+    background: #0073aa;
+    color: #fff;
+}
+
+.ekwa-pagination .dashicons {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+}
+
+/* ==================================
+   No Posts Found
+   ================================== */
+
+.ekwa-no-posts {
+    background: #fff;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.ekwa-no-posts h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.ekwa-no-posts p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* ==================================
+   Design Variations
+   ================================== */
+
+/* Design 2 - Modern */
+.ekwa-design2 .ekwa-single-post,
+.ekwa-design2 .ekwa-blog-post,
+.ekwa-design2 .ekwa-widget,
+.ekwa-design2 .ekwa-post-navigation {
+    border-radius: 0;
+    border-left: 4px solid #0073aa;
+}
+
+.ekwa-design2 .ekwa-post-title {
+    font-family: 'Georgia', serif;
+}
+
+/* Design 3 - Minimal */
+.ekwa-design3 .ekwa-single-post,
+.ekwa-design3 .ekwa-blog-post,
+.ekwa-design3 .ekwa-widget,
+.ekwa-design3 .ekwa-post-navigation {
+    box-shadow: none;
+    border: 1px solid #e5e5e5;
+}
+
+.ekwa-design3 .ekwa-widget-title {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* ==================================
+   Responsive Design
+   ================================== */
+
+@media (max-width: 992px) {
+    .ekwa-content-wrapper {
+        flex-direction: column;
+    }
+
+    .ekwa-sidebar {
+        width: 100%;
+        order: 2 !important;
+    }
+
+    .ekwa-posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .ekwa-blog-container {
+        padding: 20px 15px;
+    }
+
+    .ekwa-single-post {
+        padding: 25px 20px;
+    }
+
+    .ekwa-post-title {
+        font-size: 2rem;
+    }
+
+    .ekwa-nav-links {
+        grid-template-columns: 1fr;
+    }
+
+    .ekwa-nav-next .ekwa-nav-link {
+        text-align: left;
+    }
+
+    .ekwa-nav-next .ekwa-nav-subtitle {
+        justify-content: flex-start;
+    }
+
+    .ekwa-posts-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .ekwa-post-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ekwa-post-title {
+        font-size: 1.5rem;
+    }
+
+    .ekwa-widget {
+        padding: 20px 15px;
+    }
+
+    .ekwa-recent-post-thumbnail {
+        width: 60px;
+    }
+
+    .ekwa-recent-post-thumbnail img {
+        height: 60px;
+    }
+}
