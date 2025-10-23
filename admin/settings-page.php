@@ -265,18 +265,6 @@ $carousel_enable_lazyload = get_option('ekwa_carousel_enable_lazyload', '0');
             </tbody>
         </table>
 
-        <script>
-        // Update shortcode display when lazy loading checkbox changes
-        document.getElementById('ekwa_carousel_enable_lazyload').addEventListener('change', function() {
-            var shortcodeDisplay = document.getElementById('ekwa-dynamic-shortcode');
-            if (this.checked) {
-                shortcodeDisplay.textContent = '[ekwa_related_articles lazyload="on"]';
-            } else {
-                shortcodeDisplay.textContent = '[ekwa_related_articles]';
-            }
-        });
-        </script>
-
         <p class="submit">
             <input type="submit"
                    name="ekwa_blog_save_settings"
@@ -361,3 +349,17 @@ code {
     color: #d63384;
 }
 </style>
+
+<script>
+jQuery(document).ready(function($) {
+    // Update shortcode display when lazy loading checkbox changes
+    $('#ekwa_carousel_enable_lazyload').on('change', function() {
+        var shortcodeDisplay = $('#ekwa-dynamic-shortcode');
+        if (this.checked) {
+            shortcodeDisplay.text('[ekwa_related_articles lazyload="on"]');
+        } else {
+            shortcodeDisplay.text('[ekwa_related_articles]');
+        }
+    });
+});
+</script>

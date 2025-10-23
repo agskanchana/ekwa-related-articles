@@ -22,7 +22,7 @@ $template_design = get_option('ekwa_blog_template_design', 'design1');
 
             <?php if (is_home() && !is_front_page()) : ?>
                 <div class="ekwa-page-header">
-                    <h1 class="ekwa-page-title">Blog</h1>
+                    <h1 class="ekwa-page-title">Latest From Our Blog</h1>
                 </div>
             <?php endif; ?>
 

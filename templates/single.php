@@ -133,9 +133,10 @@ $recent_posts_count = get_option('ekwa_blog_recent_posts_count', '5');
                         // Get primary category and create back to link
                         $categories = get_the_category();
                         if (!empty($categories)) {
-                            // Filter out "Uncategorized"
+                            // Filter out "Uncategorized", "featured", and "featured-articles"
                             $filtered_categories = array_filter($categories, function($cat) {
-                                return strtolower($cat->slug) !== 'uncategorized';
+                                $slug = strtolower($cat->slug);
+                                return $slug !== 'uncategorized' && $slug !== 'featured' && $slug !== 'featured-articles';
                             });
 
                             if (!empty($filtered_categories)) {
