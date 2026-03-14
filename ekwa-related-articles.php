@@ -3,7 +3,7 @@
  * Plugin Name: EKWA Related Articles
  * Plugin URI: https://ekwa.com
  * Description: Custom blog templates with multiple designs for single posts, blog roll, and archives. Includes configurable sidebar position and prev/next navigation.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: EKWA
  * Author URI: https://ekwa.com
  * License: GPL-2.0+
