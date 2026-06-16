@@ -25,6 +25,11 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 	'ekwa-related-articles'
 );
 
+// Track the "main" branch for updates. Without this the update checker
+// defaults to a "master" branch, which does not exist in this repo, so
+// no updates are ever detected on installed sites.
+$myUpdateChecker->setBranch('main');
+
 // Define plugin constants
 define('EKWA_RELATED_ARTICLES_VERSION', '1.0.8');
 define('EKWA_RELATED_ARTICLES_PATH', plugin_dir_path(__FILE__));
