@@ -3,7 +3,7 @@
  * Plugin Name: EKWA Related Articles
  * Plugin URI: https://ekwa.com
  * Description: Custom blog templates with multiple designs for single posts, blog roll, and archives. Includes configurable sidebar position and prev/next navigation.
- * Version: 1.0.9
+ * Version: 1.1.0
  * Author: EKWA
  * Author URI: https://ekwa.com
  * License: GPL-2.0+
@@ -31,7 +31,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 $myUpdateChecker->setBranch('main');
 
 // Define plugin constants
-define('EKWA_RELATED_ARTICLES_VERSION', '1.0.9');
+define('EKWA_RELATED_ARTICLES_VERSION', '1.1.0');
 define('EKWA_RELATED_ARTICLES_PATH', plugin_dir_path(__FILE__));
 define('EKWA_RELATED_ARTICLES_URL', plugin_dir_url(__FILE__));
 
@@ -160,12 +160,7 @@ class EKWA_Related_Articles {
             (is_archive() && get_post_type() === 'post')
         ) {
             // Enqueue base styles
-            wp_enqueue_style(
-                'ekwa-related-articles',
-                EKWA_RELATED_ARTICLES_URL . 'assets/css/style.css',
-                array(),
-                EKWA_RELATED_ARTICLES_VERSION
-            );
+            $this->enqueue_style_maybe_inline('ekwa-related-articles', 'assets/css/style.css');
 
             // Get selected design
             $template_design = get_option('ekwa_blog_template_design', 'design1');
@@ -178,13 +173,34 @@ class EKWA_Related_Articles {
             );
 
             if (isset($design_files[$template_design])) {
-                wp_enqueue_style(
+                $this->enqueue_style_maybe_inline(
                     'ekwa-related-articles-' . $template_design,
-                    EKWA_RELATED_ARTICLES_URL . 'assets/css/' . $design_files[$template_design],
-                    array('ekwa-related-articles'),
-                    EKWA_RELATED_ARTICLES_VERSION
+                    'assets/css/' . $design_files[$template_design],
+                    array('ekwa-related-articles')
                 );
             }
+        }
+    }
+
+    /**
+     * Enqueue a plugin stylesheet, or print it inline in <head> when the
+     * "Inline CSS" setting is turned on (off by default).
+     */
+    private function enqueue_style_maybe_inline($handle, $relative_path, $deps = array()) {
+        $inline_css = get_option('ekwa_inline_css', '0');
+        $file_path = EKWA_RELATED_ARTICLES_PATH . $relative_path;
+
+        if ($inline_css === '1' && file_exists($file_path)) {
+            wp_register_style($handle, false, $deps, EKWA_RELATED_ARTICLES_VERSION);
+            wp_enqueue_style($handle);
+            wp_add_inline_style($handle, file_get_contents($file_path));
+        } else {
+            wp_enqueue_style(
+                $handle,
+                EKWA_RELATED_ARTICLES_URL . $relative_path,
+                $deps,
+                EKWA_RELATED_ARTICLES_VERSION
+            );
         }
     }
 
@@ -211,6 +227,7 @@ class EKWA_Related_Articles {
         register_setting('ekwa_blog_templates_settings', 'ekwa_blog_show_recent_posts');
         register_setting('ekwa_blog_templates_settings', 'ekwa_blog_show_categories');
         register_setting('ekwa_blog_templates_settings', 'ekwa_blog_recent_posts_count');
+        register_setting('ekwa_blog_templates_settings', 'ekwa_inline_css');
 
         // Carousel settings
         register_setting('ekwa_blog_templates_settings', 'ekwa_carousel_desktop_items');
@@ -546,6 +563,7 @@ function ekwa_related_articles_activate() {
     add_option('ekwa_blog_show_recent_posts', '1');
     add_option('ekwa_blog_show_categories', '1');
     add_option('ekwa_blog_recent_posts_count', '5');
+    add_option('ekwa_inline_css', '0');
 
     // Carousel options
     add_option('ekwa_carousel_desktop_items', '3');

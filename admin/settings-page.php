@@ -18,6 +18,7 @@ if (isset($_POST['ekwa_blog_save_settings'])) {
     update_option('ekwa_blog_show_recent_posts', isset($_POST['ekwa_blog_show_recent_posts']) ? '1' : '0');
     update_option('ekwa_blog_show_categories', isset($_POST['ekwa_blog_show_categories']) ? '1' : '0');
     update_option('ekwa_blog_recent_posts_count', absint($_POST['ekwa_blog_recent_posts_count']));
+    update_option('ekwa_inline_css', isset($_POST['ekwa_inline_css']) ? '1' : '0');
 
     // Carousel settings
     update_option('ekwa_carousel_desktop_items', absint($_POST['ekwa_carousel_desktop_items']));
@@ -37,6 +38,7 @@ $template_design = get_option('ekwa_blog_template_design', 'design1');
 $show_recent_posts = get_option('ekwa_blog_show_recent_posts', '1');
 $show_categories = get_option('ekwa_blog_show_categories', '1');
 $recent_posts_count = get_option('ekwa_blog_recent_posts_count', '5');
+$inline_css = get_option('ekwa_inline_css', '0');
 
 // Carousel options
 $carousel_desktop_items = get_option('ekwa_carousel_desktop_items', '3');
@@ -143,6 +145,21 @@ $carousel_enable_lazyload = get_option('ekwa_carousel_enable_lazyload', '0');
                                value="1"
                                <?php checked($show_categories, '1'); ?>>
                         <p class="description">Display categories in sidebar</p>
+                    </td>
+                </tr>
+
+                <!-- Inline CSS -->
+                <tr>
+                    <th scope="row">
+                        <label for="ekwa_inline_css">Inline CSS</label>
+                    </th>
+                    <td>
+                        <input type="checkbox"
+                               name="ekwa_inline_css"
+                               id="ekwa_inline_css"
+                               value="1"
+                               <?php checked($inline_css, '1'); ?>>
+                        <p class="description">Print <code>style.css</code> and the selected design stylesheet directly in <code>&lt;head&gt;</code> instead of loading them as separate files. Only applies to the single post, blog index, and archive templates. Off by default.</p>
                     </td>
                 </tr>
             </tbody>
