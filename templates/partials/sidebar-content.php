@@ -37,9 +37,22 @@ $recent_posts_count = get_option('ekwa_blog_recent_posts_count', '5');
                             <li class="ekwa-recent-post-item">
                                 <?php if (has_post_thumbnail()) : ?>
                                     <div class="ekwa-recent-post-thumbnail">
+                                        <div class="ekwa-recent-post-thumbnail">
                                         <a href="<?php the_permalink(); ?>">
-                                            <?php the_post_thumbnail('thumbnail'); ?>
+                                            <?php //the_post_thumbnail('thumbnail'); ?>
+                                            <?php
+                                            $thumb_id = get_post_thumbnail_id();
+                                            $src      = wp_get_attachment_image_url( $thumb_id, 'thumbnail' );
+                                            $alt      = get_post_meta( $thumb_id, '_wp_attachment_image_alt', true );
+                                            $meta     = wp_get_attachment_metadata( $thumb_id );
+                                            if ( $src ) : ?>
+                                                <img class="lazyload" data-src="<?php echo esc_url( $src ); ?>"
+                                                    width="<?php echo esc_attr( $meta['sizes']['thumbnail']['width'] ?? '' ); ?>"
+                                                    height="<?php echo esc_attr( $meta['sizes']['thumbnail']['height'] ?? '' ); ?>"
+                                                    alt="<?php echo esc_attr( $alt ); ?>" >
+                                            <?php endif; ?>
                                         </a>
+                                    </div>
                                     </div>
                                 <?php endif; ?>
 

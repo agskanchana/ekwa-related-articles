@@ -69,6 +69,11 @@ $recent_posts_count = get_option('ekwa_blog_recent_posts_count', '5');
                             $content = get_the_content();
                             $content = apply_filters('the_content', $content);
 
+                            // Lazy load content images (theme-provided helper)
+                            if (function_exists('ekwa_content')) {
+                                $content = ekwa_content($content);
+                            }
+
                             // Split content into paragraphs
                             $paragraphs = preg_split('/(<p[^>]*>.*?<\/p>)/is', $content, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
@@ -82,8 +87,13 @@ $recent_posts_count = get_option('ekwa_blog_recent_posts_count', '5');
 
                                     // After first paragraph, insert featured image
                                     if (!$first_paragraph_shown && has_post_thumbnail() && !$image_inserted) {
+                                        // Featured image sits below the fold on mobile, so lazy load it
+                                        $thumbnail_html = get_the_post_thumbnail(null, 'large');
+                                        if (function_exists('ekwa_content')) {
+                                            $thumbnail_html = ekwa_content($thumbnail_html);
+                                        }
                                         echo '<div class="ekwa-post-thumbnail">';
-                                        the_post_thumbnail('large');
+                                        echo $thumbnail_html;
                                         echo '</div>';
                                         $image_inserted = true;
                                     }
@@ -103,14 +113,20 @@ $recent_posts_count = get_option('ekwa_blog_recent_posts_count', '5');
                         <!-- Featured Image (Desktop) -->
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="ekwa-post-thumbnail">
-                                <?php the_post_thumbnail('large'); ?>
+                                <?php the_post_thumbnail('large', array('fetchpriority' => 'high', 'loading' => 'eager')); ?>
                             </div>
                         <?php endif; ?>
 
                         <!-- Post Content (Desktop) -->
                         <div class="ekwa-post-content">
                             <?php
-                            the_content();
+                            $content = apply_filters('the_content', get_the_content());
+
+                            // Lazy load content images (theme-provided helper)
+                            if (function_exists('ekwa_content')) {
+                                $content = ekwa_content($content);
+                            }
+                            echo $content;
 
                             wp_link_pages(array(
                                 'before' => '<div class="page-links">' . __('Pages:', 'ekwa-related-articles'),
