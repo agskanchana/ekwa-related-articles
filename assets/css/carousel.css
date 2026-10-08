@@ -14,6 +14,11 @@
     padding: 0 20px;
 }
 
+/* Hide empty <p> elements left behind when a host runs wpautop() over the shortcode output */
+.ekwa-related-articles-carousel p:empty {
+    display: none;
+}
+
 .ekwa-carousel-heading {
     font-size: 2rem;
     margin-bottom: 30px;

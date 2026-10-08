@@ -518,6 +518,17 @@ Plugin includes automatic update checking from GitHub repository:
 4. Clear browser cache
 5. Check browser console for JavaScript errors
 
+### Stray `<p>` / `<br>` Tags in the Carousel
+
+**Issue:** The carousel markup contains `<p>` or `<br />` tags and the arrows/dots/script don't work.
+
+**Cause:** Something on the site runs `wpautop()` *after* shortcodes are expanded. In stock WordPress `wpautop` runs at priority 10 and `do_shortcode` at 11, so this should not happen. Since 1.1.2 the plugin returns single-line markup and prints its loader script in `wp_footer`, so it survives this, but the real fix is on the site.
+
+**Solutions:**
+1. Check the priorities: `has_filter('the_content', 'wpautop')` should be lower than `has_filter('the_content', 'do_shortcode')` (11)
+2. Look for a plugin, mu-plugin or theme code that does `remove_filter('the_content', 'wpautop')` and re-adds it at a later priority
+3. If your theme overrides `article-templates/article-carousel-item.php`, wrap the read-more link in `<div class="ekwa-article-footer">` as the plugin template does
+
 ### Sidebar Not Appearing
 
 **Issue:** Sidebar missing on single posts.

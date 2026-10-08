@@ -3,7 +3,7 @@
  * Plugin Name: EKWA Related Articles
  * Plugin URI: https://ekwa.com
  * Description: Custom blog templates with multiple designs for single posts, blog roll, and archives. Includes configurable sidebar position and prev/next navigation.
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: EKWA
  * Author URI: https://ekwa.com
  * License: GPL-2.0+
@@ -31,13 +31,23 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 $myUpdateChecker->setBranch('main');
 
 // Define plugin constants
-define('EKWA_RELATED_ARTICLES_VERSION', '1.1.1');
+define('EKWA_RELATED_ARTICLES_VERSION', '1.1.2');
 define('EKWA_RELATED_ARTICLES_PATH', plugin_dir_path(__FILE__));
 define('EKWA_RELATED_ARTICLES_URL', plugin_dir_url(__FILE__));
 
 class EKWA_Related_Articles {
 
     private static $instance = null;
+
+    /**
+     * Whether a carousel was rendered and still needs the loader script.
+     */
+    private $carousel_loader_needed = false;
+
+    /**
+     * Whether the carousel loader script has already been printed.
+     */
+    private $carousel_loader_printed = false;
 
     public static function get_instance() {
         if (null === self::$instance) {
@@ -69,6 +79,9 @@ class EKWA_Related_Articles {
 
         // Register shortcode
         add_shortcode('ekwa_related_articles', array($this, 'related_articles_shortcode'));
+
+        // Print the carousel loader script in the footer (not inside the shortcode output)
+        add_action('wp_footer', array($this, 'print_carousel_loader'), 99);
 
         // AJAX handlers for pagination
         add_action('wp_ajax_ekwa_load_posts', array($this, 'ajax_load_posts'));
@@ -371,53 +384,56 @@ class EKWA_Related_Articles {
             </div>
 
             <?php if ($enable_arrows === '1') : ?>
-                <button class="ekwa-carousel-prev" aria-label="Previous">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                </button>
-                <button class="ekwa-carousel-next" aria-label="Next">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </button>
+                <div class="ekwa-carousel-nav">
+                    <button class="ekwa-carousel-prev" aria-label="Previous">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="ekwa-carousel-next" aria-label="Next">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
             <?php endif; ?>
 
             <?php if ($enable_dots === '1') : ?>
                 <div class="ekwa-carousel-dots"></div>
             <?php endif; ?>
         </div>
-
-        <script>
-        // Lazy load carousel script on user interaction
-        (function() {
-            var carouselLoaded = false;
-            var carouselScript = '<?php echo EKWA_RELATED_ARTICLES_URL; ?>assets/js/carousel.js?v=<?php echo EKWA_RELATED_ARTICLES_VERSION; ?>';
-
-            function loadCarousel() {
-                if (!carouselLoaded) {
-                    carouselLoaded = true;
-                    var script = document.createElement('script');
-                    script.src = carouselScript;
-                    document.body.appendChild(script);
-                }
-            }
-
-            // Load on scroll, mousemove, or touch
-            var events = ['scroll', 'mousemove', 'touchstart', 'keydown'];
-            events.forEach(function(event) {
-                window.addEventListener(event, function() {
-                    loadCarousel();
-                    // Remove listeners after first trigger
-                    events.forEach(function(e) {
-                        window.removeEventListener(e, loadCarousel);
-                    });
-                }, { once: true, passive: true });
-            });
-
-            // Also load after 3 seconds as fallback
-            setTimeout(loadCarousel, 3000);
-        })();
-        </script>
         <?php
 
-        return ob_get_clean();
+        $html = ob_get_clean();
+
+        // The loader script is printed once in wp_footer. If the footer has already run
+        // (e.g. a footer post rendered after wp_footer()), append it here instead.
+        $this->carousel_loader_needed = true;
+        if (did_action('wp_footer') && !$this->carousel_loader_printed) {
+            $this->carousel_loader_printed = true;
+            $html .= $this->get_carousel_loader_script();
+        }
+
+        // Collapse newlines so wpautop() (which hosts may run after shortcodes) finds nothing to turn into <br> / <p>.
+        return preg_replace('/\s*[\r\n]+\s*/', ' ', trim($html));
+    }
+
+    /**
+     * Single-line script that lazy loads carousel.js on first user interaction.
+     * Must stay on one line with no // comments so it survives wpautop().
+     */
+    private function get_carousel_loader_script() {
+        $src = EKWA_RELATED_ARTICLES_URL . 'assets/js/carousel.js?v=' . EKWA_RELATED_ARTICLES_VERSION;
+
+        return '<script>(function(){var loaded=false;function loadCarousel(){if(loaded){return;}loaded=true;var s=document.createElement("script");s.src=' . wp_json_encode($src) . ';document.body.appendChild(s);}["scroll","mousemove","touchstart","keydown"].forEach(function(e){window.addEventListener(e,loadCarousel,{once:true,passive:true});});setTimeout(loadCarousel,3000);})();</script>';
+    }
+
+    /**
+     * Print the carousel loader script in the footer when a carousel was rendered.
+     */
+    public function print_carousel_loader() {
+        if (!$this->carousel_loader_needed || $this->carousel_loader_printed) {
+            return;
+        }
+
+        $this->carousel_loader_printed = true;
+        echo $this->get_carousel_loader_script();
     }
 
     /**
